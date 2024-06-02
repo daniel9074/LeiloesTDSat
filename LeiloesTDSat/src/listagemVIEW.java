@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
@@ -124,10 +125,18 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         String id = id_produto_venda.getText();
 
-        ProdutosDAO produtosdao = new ProdutosDAO();
+    try {
+        int idNumerico = Integer.parseInt(id);
 
-        produtosdao.venderProduto(Integer.parseInt(id));
+        ProdutosDAO produtosdao = new ProdutosDAO();
+        produtosdao.venderProduto(idNumerico);
         listarProdutos(); // Atualiza a lista de produtos após a venda
+
+       
+    } catch (NumberFormatException e) {
+        // Se a conversão falhar, exibimos uma mensagem de erro
+        JOptionPane.showMessageDialog(this, "Por favor, insira um ID numérico válido.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
